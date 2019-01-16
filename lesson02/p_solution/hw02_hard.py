@@ -41,6 +41,33 @@ date = '01.22.1001'
 date = '1.12.1001'
 date = '-2.10.3001'
 
+def iscorrectdate(input_date):
+    date = str(input_date)
+    list_date = date.split('.')
+    dd = list_date[0]
+    mm = list_date[1]
+    yyyy = list_date[2]
+    if len(dd) == 2 and len(mm) ==2 and len(yyyy) == 4:
+        dd = int(dd)
+        mm = int(mm)
+        yyyy = int(yyyy)
+        if(dd > 0 and dd <= 31):
+            ret1 = True
+        else:
+            return "Incorrect day"
+        if(mm > 0 and mm <= 12):
+            ret2 = True
+        else:
+            return "Incorrect month"
+        if(yyyy > 0 and yyyy <= 9999):
+            ret3 = True
+        else:
+            return "Incorrect year"
+    else:
+        return "Incorrect input date str lenght"
+        
+    if(ret1 and ret2 and ret3):
+            return "Date is correct"
 
 # Задание-3: "Перевёрнутая башня" (Задача олимпиадного уровня)
 #
@@ -73,6 +100,9 @@ date = '-2.10.3001'
 # Выход: 5 3
 def main():
     linean(equation, 2.5)
+    date = '26.11.2019'
+    print(iscorrectdate(date))
+    
 if __name__ == "__main__":
     try:
         main()
