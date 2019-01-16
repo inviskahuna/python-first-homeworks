@@ -11,6 +11,19 @@
 # 3.   киви
 # 4.  арбуз
 
+def list2numlist(fruits_names):
+    lenght = len(fruits_names)
+    i = 0
+    numlist = ''
+    max_str_len = len(max(fruits_names)) # how add to string format?
+    if lenght <= 0:
+        return("Please enter fruits name")
+    else:
+        while lenght > i:
+            numlist += "{}.{:>11} \n".format(i+1, fruits_names[i])
+            i += 1
+        return numlist
+
 # Подсказка: воспользоваться методом .format()
 
 
@@ -25,7 +38,10 @@
 # если элемент кратен двум, то разделить его на 4, если не кратен, то умножить на два.
 
 def main():
-    pass
+    #Case 1
+    fruits = ["apple", "banana", "kivi", "watermelon", "peach", "melon"]
+    print(list2numlist(fruits))
+
 if __name__ == "__main__":
     try:
         main()
