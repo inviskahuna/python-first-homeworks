@@ -1,3 +1,4 @@
+
 # Задание-1: уравнение прямой вида y = kx + b задано в виде строки.
 # Определить координату y точки с заданной координатой x.
 
@@ -5,6 +6,22 @@ equation = 'y = -12x + 11111140.2121'
 x = 2.5
 # вычислите и выведите y
 
+def linean(equation_str, input_x):
+    raw = str(equation_str)
+    x = float(input_x)
+    splited = raw.split(" ")
+    k = float(str(splited[2]).replace('x', ""))
+    b = float(splited[4])
+    if(splited[3] == '+'):
+        s = 1
+    elif(splited[3] == '-'):
+        s = -1
+    else:
+        print("error")
+    y = k*x+(b*s)
+    print("y = {}x + {}".format(k, b))
+
+    print("If x={}, then y={}".format(x, y))
 
 # Задание-2: Дата задана в виде строки формата 'dd.mm.yyyy'.
 # Проверить, корректно ли введена дата.
@@ -54,3 +71,10 @@ date = '-2.10.3001'
 #
 # Вход: 11
 # Выход: 5 3
+def main():
+    linean(equation, 2.5)
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\n exit")
