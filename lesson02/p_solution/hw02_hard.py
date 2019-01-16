@@ -98,10 +98,26 @@ def iscorrectdate(input_date):
 #
 # Вход: 11
 # Выход: 5 3
+def crazy_tower_lift(apartaments_num):
+    floor = 0
+    apartaments_m = 0
+    i = 1
+    while(apartaments_m < apartaments_num):
+        apartaments_m += i**2
+        floor += 1
+    t = floor
+    if(apartaments_m != apartaments_num):
+        while(apartaments_m > apartaments_num):
+            apartaments_m -= i
+    return apartaments_num, t, 
+
+
 def main():
     linean(equation, 2.5)
     date = '26.11.2019'
     print(iscorrectdate(date))
+    print(crazy_tower_lift(4))
+    test(13)
     
 if __name__ == "__main__":
     try:
