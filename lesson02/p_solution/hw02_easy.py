@@ -41,6 +41,15 @@ def list_xor(list1, list2):
 # Получите НОВЫЙ список из элементов исходного, выполнив следующие условия:
 # если элемент кратен двум, то разделить его на 4, если не кратен, то умножить на два.
 
+def math_fun(num_list):
+    new_num_list = []
+    for i in num_list:
+        if i % 2 == 0:
+            new_num_list.append(i/4)
+        else:
+            new_num_list.append(i*2)
+    return new_num_list
+
 def main():
     #Case 1
     fruits = ["apple", "banana", "kivi", "watermelon", "peach", "melon"]
@@ -49,6 +58,10 @@ def main():
     a = [1,2,3,4,5,6,7,8,9]
     b = [2,4,6,8]
     print(list_xor(a,b))
+    #Case 3
+    num = [1,2,3,4,5,6,7,8,9]
+    print(math_fun(num))
+
 if __name__ == "__main__":
     try:
         main()
