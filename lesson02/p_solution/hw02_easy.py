@@ -49,19 +49,22 @@ def math_fun(num_list):
         else:
             new_num_list.append(i*2)
     return new_num_list
-
+    
 def main():
-    #Case 1
+    print("#------------------------------#")
+    print("CASE 1")
     fruits = ["apple", "banana", "kivi", "watermelon", "peach", "melon"]
     print(list2numlist(fruits))
-    #Case 2
+    print("#------------------------------#")
+    print("CASE 2")
     a = [1,2,3,4,5,6,7,8,9]
     b = [2,4,6,8]
     print(list_xor(a,b))
-    #Case 3
+    print("#------------------------------#")
+    print("CASE 3")
     num = [1,2,3,4,5,6,7,8,9]
     print(math_fun(num))
-
+    print("#------------------------------#")
 if __name__ == "__main__":
     try:
         main()

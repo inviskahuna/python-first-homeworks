@@ -99,25 +99,39 @@ def iscorrectdate(input_date):
 # Вход: 11
 # Выход: 5 3
 def crazy_tower_lift(apartaments_num):
-    floor = 0
-    apartaments_m = 0
-    i = 1
-    while(apartaments_m < apartaments_num):
-        apartaments_m += i**2
-        floor += 1
-    t = floor
-    if(apartaments_m != apartaments_num):
-        while(apartaments_m > apartaments_num):
-            apartaments_m -= i
-    return apartaments_num, t, 
+    #I`m use refrence https://geekbrains.ru/posts/babylon_task & 
+    #                 https://fido7.ru.algorithms.narkive.com/r6fkHksY
+    block = 0   
+    last_flat = 0   
+    last_floor = 0 
+    i = 0
+    while apartaments_num > last_flat:
+        block += 1
+        last_flat += block * block
+        last_floor += block
+    while last_flat > apartaments_num:
+        last_flat -= 1
+        if i < block - 1:
+            i += 1
+        else:
+            last_floor -= 1
+            i = 0
+    position = block - i
+    return('Floor: {} Apartaments: {}'.format(last_floor, position))
 
 
 def main():
+    print("#------------------------------#")
+    print("CASE 1")
     linean(equation, 2.5)
+    print("#------------------------------#")
+    print("CASE 2")
     date = '26.11.2019'
     print(iscorrectdate(date))
-    print(crazy_tower_lift(4))
-    test(13)
+    print("#------------------------------#")
+    print("CASE 3")
+    print(crazy_tower_lift(250005))
+    print("#------------------------------#")
     
 if __name__ == "__main__":
     try:
