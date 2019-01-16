@@ -63,17 +63,31 @@ def fill_randoms(size_n):
 # например, lst = [1, 2, 4, 5, 6, 2, 5, 2], нужно получить lst2 = [1, 2, 4, 5, 6]
 # б) элементы исходного списка, которые не имеют повторений:
 # например, lst = [1 , 2, 4, 5, 6, 2, 5, 2], нужно получить lst2 = [1, 4, 6]
+def lists_fun(input_list):
+    list_a = list(set(input_list))
+    list_b = []
+    for i in input_list:
+        if input_list.count(i) == 1:
+            list_b.append(i)
+    return list_a, list_b
 
 def main():
-    #------------------------------#
+    print("#------------------------------#")
+    print("CASE 1")
     nums = [2, -5, 8, 9, -25, 25, 4]
     print(num_sqrts(nums))
-    #------------------------------#
+    print("#------------------------------#")
+    print("CASE 2")
     data = "16.04.2013"
     print(numdat2strdat(data))
-    #------------------------------#
-    print(fill_randoms(100))
-    #------------------------------#
+    print("#------------------------------#")
+    print("CASE 3")
+    print(fill_randoms(3))
+    print("#------------------------------#")
+    print("CASE 4")
+    a = [1, 2, 4, 5, 6, 2, 5, 2]
+    print(lists_fun(a))
+    print("#------------------------------#")
 
 if __name__ == "__main__":
     try:
