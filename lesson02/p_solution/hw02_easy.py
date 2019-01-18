@@ -15,12 +15,12 @@ def list2numlist(fruits_names):
     lenght = len(fruits_names)
     i = 0
     numlist = ''
-    max_str_len = len(max(fruits_names)) # how add to string format?
+    max_str_len = len(max(fruits_names)) 
     if lenght <= 0:
         return("Please enter fruits name")
     else:
         while lenght > i:
-            numlist += "{}.{:>11} \n".format(i+1, fruits_names[i])
+            numlist += "{}.{:>{}} \n".format(i+1, fruits_names[i], max_str_len)
             i += 1
         return numlist
 
@@ -49,7 +49,7 @@ def math_fun(num_list):
         else:
             new_num_list.append(i*2)
     return new_num_list
-    
+
 def main():
     print("#------------------------------#")
     print("CASE 1")
@@ -65,6 +65,7 @@ def main():
     num = [1,2,3,4,5,6,7,8,9]
     print(math_fun(num))
     print("#------------------------------#")
+    
 if __name__ == "__main__":
     try:
         main()
