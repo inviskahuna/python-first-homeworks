@@ -1,3 +1,4 @@
+import re
 # Задание-1:
 # Написать программу, выполняющую операции (сложение и вычитание) с простыми дробями.
 # Дроби вводятся и выводятся в формате:
@@ -9,6 +10,36 @@
 # Ввод: -2/3 - -2
 # Вывод: 1 1/3
 
+def my_calc(in_str:str):
+    pattern = r'((\d+) (\d+/\d+) ([+,-]) (\d+) (\d+/\d+))'
+    #         numr
+    # integer-------
+    #         denumr
+    if re.match(pattern, in_str):
+        parser = re.split('\D+', in_str)
+        parser = list(map(int, parser))
+        integerA = parser[0]
+        numrA = parser[1]
+        denumrA = parser[2]
+        numrA += denumrA*integerA
+        integerB = parser[3]
+        numrB = parser[4]
+        denumrB = parser[5]
+        numrB += denumrB * integerB
+
+        denumr = denumrA * denumrB
+        numrA *= denumrB
+        numrB *= denumrA
+        numr = numrA + numrB
+
+        d_out = denumr
+        n_out = numr % denumr
+        i_out = (numr - n_out)/ denumr
+
+        ret = int(i_out), n_out, d_out
+    else:
+        ret = ("bad format use X A./B +- Y C/D")
+    return ret
 
 # Задание-2:
 # Дана ведомость расчета заработной платы (файл "data/workers").
@@ -31,3 +62,13 @@
 # Подсказка:
 # Чтобы получить список больших букв русского алфавита:
 # print(list(map(chr, range(ord('А'), ord('Я')+1))))
+
+def main():
+    print(my_calc("1 1/3 + 0 2/5"))
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\n exit")

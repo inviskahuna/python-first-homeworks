@@ -69,6 +69,7 @@ def main():
     print(isparallelogramm((2, 3), (4, 11), (9, 11), (7, 3)))
     print(isparallelogramm((2, 3), (4, 0), (9, 11), (7, 3)))
 
+
 if __name__ == "__main__":
     try:
         main()
