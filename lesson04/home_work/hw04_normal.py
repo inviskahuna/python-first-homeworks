@@ -28,16 +28,16 @@ def lower_case_near(in_text: str, use_re: bool):
     if use_re:
         return re.findall("[a-z]+", in_text)
     else:
-        a = ''
-        b = []
+        word = ''
+        ret_list = []
         not_re = [x for x in in_text if x in ascii_lowercase]
         for i in in_text:
             if i in not_re:
-                a += i
+                word += i
             else:
-                b.append(a)
-                a = ""
-        return [x for x in b if x != ""]
+                ret_list.append(word)
+                word = ""
+        return [x for x in ret_list if x != ""]
 
 
 # Задание-2:
@@ -66,7 +66,29 @@ line_2 = 'mtMmEZUOmcqWiryMQhhTxqKdSTKCYEJlEZCsGAMkgAYEOmHBSQsSUHKvSfbmxULaysm' \
 
 
 def upper_case_near(in_text: str, use_re: bool):
-    return 0
+    if use_re:
+        return re.findall("[a-z]{2}([A-Z]+)[A-Z]{2}", in_text)
+    else:
+        ret = []
+        word = ''
+        state = 0
+        for i in in_text:  # Check every symbol in text
+            # In this case use automate of state
+            if i.islower():
+                if state == 1 or state == 2:
+                    state = 2
+                else:
+                    if len(word) > 2:
+                        ret.append(word[:-2])  # Append to ret without 2 uppercase symbols
+                    state = 1
+                    word = ''  # Flush word str var
+            if i.isupper():
+                if state == 2 or state == 3:
+                    word += i  # Add uppercase symbol
+                    state = 3
+                else:
+                    state = 0
+        return ret
 
 
 # Задание-3:
@@ -80,6 +102,8 @@ def upper_case_near(in_text: str, use_re: bool):
 def main():
     print(lower_case_near(line, use_re=False))
     print(lower_case_near(line, use_re=True))
+    print(upper_case_near(line_2, use_re=True))
+    print(upper_case_near(line_2, use_re=False))
 
 
 if __name__ == "__main__":
