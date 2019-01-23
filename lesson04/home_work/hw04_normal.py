@@ -1,7 +1,7 @@
 import re
 from string import ascii_lowercase
 from random import randint
-from string import ascii_uppercase
+# from string import ascii_uppercase
 # Задание-1:
 # Вывести символы в нижнем регистре, которые находятся вокруг
 # 1 или более символов в верхнем регистре.
@@ -116,6 +116,7 @@ def main():
     print(upper_case_near(line_2, use_re=True))
     print(upper_case_near(line_2, use_re=False))
     print(create_num_file("test.txt", 2500))
+
 
 if __name__ == "__main__":
     try:
