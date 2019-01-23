@@ -1,9 +1,16 @@
+
+import re
+from functools import reduce
 # Задание-1:
 # Матрицы в питоне реализуются в виде вложенных списков:
 # Пример. Дано:
 matrix = [[1, 0, 8],
           [3, 4, 1],
           [0, 4, 2]]
+
+
+def matrix_t(in_matrix: list):
+    return list(zip(*in_matrix))
           
 # Выполнить поворот (транспонирование) матрицы
 # Пример. Результат:
@@ -40,6 +47,25 @@ number = """
 71636269561882670428252483600823257530420752963450"""
 
 
+def five_num_sum(in_num: str):
+    str_list = list(in_num.replace("\n", ""))
+    num_list = list(map(int, str_list))
+    i = 0
+    j = 0
+    c = []
+    num_group = []
+    while(i < len(num_list)):
+        t = num_list[i:i+5]
+        if len(t) == 5: num_group.append(t)
+        i += 1
+    for i in num_group:
+        c.append(reduce(lambda x, y: x*y, i))
+    larger_list_fives = num_group[c.index(max(c))]
+    larger_str_fives = list(map(str, larger_list_fives))
+    dd = ''.join(larger_str_fives)
+    g = re.search(dd, number).span()
+    return "Mul = {}, Winners = {}, Offset = {}".format(max(c), str(dd), g[0])
+
 # Задание-3 (Ферзи):
 # Известно, что на доске 8×8 можно расставить 8 ферзей так, чтобы они не били
 # друг друга. Вам дана расстановка 8 ферзей на доске.
@@ -47,3 +73,20 @@ number = """
 # Программа получает на вход восемь пар чисел,
 # каждое число от 1 до 8 — координаты 8 ферзей.
 # Если ферзи не бьют друг друга, выведите слово NO, иначе выведите YES.
+
+
+def angry_queens(coords: [int, int]*8):
+    pass
+
+
+def main():
+    print(matrix_t(matrix))
+    print(five_num_sum(number))
+    print(angry_queens([[1,2],[3,4]]))
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\n exit")

@@ -1,5 +1,6 @@
 import re
 from string import ascii_lowercase
+from random import randint
 from string import ascii_uppercase
 # Задание-1:
 # Вывести символы в нижнем регистре, которые находятся вокруг
@@ -98,13 +99,23 @@ def upper_case_near(in_text: str, use_re: bool):
 # Найдите и выведите самую длинную последовательность одинаковых цифр
 # в вышезаполненном файле.
 
+def create_num_file(file_name: str, count: int):
+    content_map = map(str, ([x + randint(0, 9) for x in range(count)]))
+    content_num = ''.join(content_map)
+    with open(file_name, 'w') as fw:
+        fw.write(content_num)
+    with open(file_name, 'r') as fr:
+        content_rd = fr.readline()
+    a = re.findall('\d', content_rd)
+    return max(a, key=len)
+
 
 def main():
     print(lower_case_near(line, use_re=False))
     print(lower_case_near(line, use_re=True))
     print(upper_case_near(line_2, use_re=True))
     print(upper_case_near(line_2, use_re=False))
-
+    print(create_num_file("test.txt", 2500))
 
 if __name__ == "__main__":
     try:
