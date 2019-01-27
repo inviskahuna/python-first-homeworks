@@ -1,4 +1,8 @@
-import lesson05.p_solution.hw05_easy as easy
+try:
+    import lesson05.p_solution.hw05_easy as easy
+except ModuleNotFoundError:
+    import hw05_easy as easy
+
 import os
 import sys
 
@@ -67,11 +71,18 @@ def mkdir_f():
 def rmdir_f():
     print("Please input dir name")
     name = input()
-    try:
-        os.rmdir(name)
-        print("Directory '{}' was removed".format(name))
-    except OSError:
-        print("Can`t remove directory")
+    print("Are your sure? Y/N")
+    agreement: str = input()
+    if agreement == "Y" or "y" or "1":
+        correct = True
+    else:
+        correct = False
+    if correct:
+        try:
+            os.rmdir(name)
+            print("Directory '{}' was removed".format(name))
+        except OSError:
+            print("Can`t remove directory")
 
 
 def my_file_manager():
