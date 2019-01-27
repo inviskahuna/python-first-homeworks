@@ -32,7 +32,7 @@ def remove_dirs():
 
 def ls_dirs():
     directory = os.listdir()
-    return tuple(directory)
+    print(tuple(directory))
 
 # Задача-3:
 # Напишите скрипт, создающий копию файла, из которого запущен данный скрипт.
@@ -49,7 +49,7 @@ def copy_myself():
 
 def main():
     print(make_dirs())
-    print(ls_dirs())
+    ls_dirs()
     print(remove_dirs())
     print(copy_myself())
     print(ls_dirs())

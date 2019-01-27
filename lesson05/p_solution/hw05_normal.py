@@ -1,3 +1,8 @@
+import lesson05.p_solution.hw05_easy as easy
+import os
+import sys
+
+
 # Задача-1:
 # Напишите небольшую консольную утилиту,
 # позволяющую работать с папками текущей директории.
@@ -10,14 +15,89 @@
 # и выводит результат действия: "Успешно создано/удалено/перешел",
 # "Невозможно создать/удалить/перейти"
 
-def my_file_manager()
+class Menu:
+    items = []
+
+    def add_item(self, text, function):
+        self.items.append({'text': text, 'func': function})
+
+    def show(self):
+        i = 1
+        for t in self.items:
+            print("{} {}".format(i, t['text']))
+            i += 1
+
+    def do(self, n):
+        self.items[n]['func']()
+
+
+def help_f():
+    print('''We have this commands:
+             "CD %PATH%" - Change directory by path like "C:\\Windows"
+             "LS" - See current directory content
+             "RMDIR %DIR_NAME%" - Remove directory
+             "MKDIR %DIR_NAME%" - Make directory''')
+
+
+def exit_f():
+    print("Exit")
+    sys.exit(0)
+
+
+def cd_f():
+    print("Please input dir")
+    path = input()
+    try:
+        os.chdir(path)
+        print("Now in '{}'".format(path))
+    except OSError:
+        print("Wrong path or not directory")
+
+
+def mkdir_f():
+    print("Please input dir name")
+    name = input()
+    try:
+        os.mkdir(name)
+        print("Directory '{}' was created".format(name))
+    except OSError:
+        print("Can`t create directory")
+
+
+def rmdir_f():
+    print("Please input dir name")
+    name = input()
+    try:
+        os.rmdir(name)
+        print("Directory '{}' was removed".format(name))
+    except OSError:
+        print("Can`t remove directory")
+
+
+def my_file_manager():
+    m = Menu()
+    m.add_item("HELP", help_f)
+    m.add_item("LS", easy.ls_dirs)
+    m.add_item("CD", cd_f)
+    m.add_item("RMDIR", rmdir_f)
+    m.add_item("MKDIR", mkdir_f)
+    m.add_item("EXIT", exit_f)
+    while True:
+        try:
+            m.show()
+            n = input("choice>")
+            m.do(int(n) - 1)
+        except ValueError:
+            print("Wrong value, use nums for navigate")
+
+
 # Для решения данной задачи используйте алгоритмы из задания easy,
 # оформленные в виде соответствующих функций,
 # и импортированные в данный файл из easy.py
 
 
 def main():
-    pass
+    my_file_manager()
 
 
 if __name__ == "__main__":
