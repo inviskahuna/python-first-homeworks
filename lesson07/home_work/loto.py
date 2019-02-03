@@ -87,20 +87,21 @@ class Card(object):
         for _ in range(0, 3):
             row_sample = (random.sample(range(1, 91), 5)) + [0]*4
             random.shuffle(row_sample)
-            card.append(row_sample)
-            print(self.sort_rows(row_sample))
+            card.append(self.sort_rows(row_sample))
         return card
 
     @staticmethod
     def verbose_card(card_array: list):
-        verbose = ""
+        verbose = "_"*55 + "\n"
         for i in card_array:
+            verbose += "|"
             for j in i:
                 if j != 0:
                     verbose += ("{:4} |").format(j)
                 else:
                     verbose += ("{:4} |").format("  ")
             verbose += ("\r\n")
+        verbose += "-" * 55
         return verbose
 
 def main():
