@@ -61,6 +61,17 @@ import random
 
 
 class Card(object):
+    card = []
+
+    def __init__(self):
+        self.card = []
+        for _ in range(0, 3):
+            row_sample = (random.sample(range(1, 91), 5)) + [0] * 4
+            random.shuffle(row_sample)
+            self.card.append(self.sort_rows(row_sample))
+
+    def __str__(self):
+        return self.verbose_card()
 
     @staticmethod
     def split_list(input_list: list, wanted_parts=1):
@@ -72,7 +83,7 @@ class Card(object):
     def sort_rows(row: list):
         indexes = []
         values = []
-        sorted_row = [0]*9
+        sorted_row = [0] * 9
         for index, value in enumerate(row):
             if value != 0:
                 indexes.append(index)
@@ -82,18 +93,17 @@ class Card(object):
             sorted_row[i] = sorted_values[j]
         return sorted_row
 
-    def make_card(self):
+    def card_array(self):
         card = []
         for _ in range(0, 3):
-            row_sample = (random.sample(range(1, 91), 5)) + [0]*4
+            row_sample = (random.sample(range(1, 91), 5)) + [0] * 4
             random.shuffle(row_sample)
             card.append(self.sort_rows(row_sample))
         return card
 
-    @staticmethod
-    def verbose_card(card_array: list):
-        verbose = "_"*55 + "\n"
-        for i in card_array:
+    def verbose_card(self):
+        verbose = "_" * 55 + "\n"
+        for i in self.card:
             verbose += "|"
             for j in i:
                 if j != 0:
@@ -104,10 +114,87 @@ class Card(object):
         verbose += "-" * 55
         return verbose
 
+
+class Game(Card):
+    barrels_in_bag = 90
+    bag = random.sample(range(1, 91), 90)
+
+    def __init__(self):
+        self.player = Card()
+        self.pc = Card()
+        print(f'''Да начнется игра между ПК и человеком! 
+        90 бочонков в мешке, по одной карточке каждому''')
+        print("PC\n", self.pc, "\nPlayer", "\n", self.player)
+
+    def get_barrel(self):
+        random.shuffle(self.bag)  # перемещаем бочонки в мешке
+        return self.bag.pop(0)  # выдадаим первый попавшийся бочонок и удалим его из мешка
+
+    def find_in_card(self, card: list, barrel: int):
+        row = 0
+        for i in card:
+            row += 1
+            column = 0
+            for j in i:
+                column += 1
+                if j == barrel:
+                    return row, column
+
+    def crossout_card_coord(self, card, c: tuple):
+        x = c[0] - 1
+        y = c[1] - 1
+        # print(f"X{x}, Y{y}")
+        print(card[x][y])
+        card[x][y] = " X"
+
+    def calc_points(self, card):
+        points = 0
+        for i in card:
+            for j in i:
+                if j == " X":
+                    points += 1
+        return points
+
+
 def main():
-    c = Card()
-    a = c.make_card()
-    print(c.verbose_card(a))
+    g = Game()
+    for _ in range(0, 90):
+        barrel = g.get_barrel()
+        player_match = g.find_in_card(g.player.card, barrel)
+        pc_match = g.find_in_card(g.pc.card, barrel)
+
+        print(f"Вытащили бочонок {barrel}")
+        print(f"Есть ли в вашей карточке? [1 - да, зачеркнуть], [0 - нет, продолжить]")
+        inp = input()
+
+        player_choise = False if int(inp) == 0 else True
+        print(f"Inp = {inp}, choise = {player_choise}, player match = {player_match}, pc mathc = {pc_match}")
+        if pc_match is not None:
+            g.crossout_card_coord(g.pc.card, pc_match)
+
+        if player_match is not None:
+            if player_choise:
+                print("ОК")
+                g.crossout_card_coord(g.player.card, player_match)
+            else:
+                print("А он есть")
+        elif player_match is None:
+            if player_choise:
+                raise Exception("Конец игры. Вы потеряли внимательность!")
+            else:
+                print("Ок")
+        print(f"ПК:\n{g.pc}\nИгрок\n{g.player}")
+        print(f"{len(g.bag)} в мешке")
+        pc_points = g.calc_points(g.pc.card)
+        player_points = g.calc_points(g.player.card)
+        if pc_points == 90:
+            print("Победил ПК")
+            return
+        elif player_points == 90:
+            print("Победил Игрок")
+            return
+        else:
+            print(f"Игра продолжается ПК = {pc_points}, Player = {player_points}")
 
 
 if __name__ == "__main__":
