@@ -187,10 +187,10 @@ def main():
         print(f"{len(g.bag)} в мешке")
         pc_points = g.calc_points(g.pc.card)
         player_points = g.calc_points(g.player.card)
-        if pc_points == 90:
+        if pc_points == 15:
             print("Победил ПК")
             return
-        elif player_points == 90:
+        elif player_points == 15:
             print("Победил Игрок")
             return
         else:
