@@ -74,14 +74,20 @@ class Card(object):
         return self.split_list(sample, 3)
 
     def verbose_card(self, card_array: list):
+        verbose = ""
         for i in card_array:
-            print(i)
-
+            for j in i:
+                if j != 0:
+                    verbose += ("{:4} |").format(j)
+                else:
+                    verbose += ("{:4} |").format("  ")
+            verbose += ("\r\n")
+        return verbose
 
 def main():
     c = Card()
     a = c.make_card()
-    c.verbose_card(a)
+    print(c.verbose_card(a))
 
 
 if __name__ == "__main__":
