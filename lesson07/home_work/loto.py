@@ -68,12 +68,31 @@ class Card(object):
         return [input_list[i * length // wanted_parts: (i + 1) * length // wanted_parts]
                 for i in range(wanted_parts)]
 
-    def make_card(self):
-        sample = (random.sample(range(1, 91), 15)) + [0]*12
-        random.shuffle(sample)
-        return self.split_list(sample, 3)
+    @staticmethod
+    def sort_rows(row: list):
+        indexes = []
+        values = []
+        sorted_row = [0]*9
+        for index, value in enumerate(row):
+            if value != 0:
+                indexes.append(index)
+                values.append(value)
+        sorted_values = sorted(values)
+        for j, i in enumerate(indexes):
+            sorted_row[i] = sorted_values[j]
+        return sorted_row
 
-    def verbose_card(self, card_array: list):
+    def make_card(self):
+        card = []
+        for _ in range(0, 3):
+            row_sample = (random.sample(range(1, 91), 5)) + [0]*4
+            random.shuffle(row_sample)
+            card.append(row_sample)
+            print(self.sort_rows(row_sample))
+        return card
+
+    @staticmethod
+    def verbose_card(card_array: list):
         verbose = ""
         for i in card_array:
             for j in i:
