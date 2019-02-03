@@ -58,6 +58,7 @@
 
 """
 import random
+import time
 
 
 class Card(object):
@@ -180,7 +181,9 @@ def main():
                 print("А он есть")
         elif player_match is None:
             if player_choise:
-                raise Exception("Конец игры. Вы потеряли внимательность!")
+                print("Конец игры. Вы потеряли внимательность!")
+                time.sleep(10)
+                return
             else:
                 print("Ок")
         print(f"ПК:\n{g.pc}\nИгрок\n{g.player}")
@@ -189,9 +192,11 @@ def main():
         player_points = g.calc_points(g.player.card)
         if pc_points == 15:
             print("Победил ПК")
+            time.sleep(10)
             return
         elif player_points == 15:
             print("Победил Игрок")
+            time.sleep(10)
             return
         else:
             print(f"Игра продолжается ПК = {pc_points}, Player = {player_points}")
